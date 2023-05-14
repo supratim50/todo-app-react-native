@@ -17,7 +17,6 @@ const TodoForm = ({submitData, removeTodo, cancleHandler, isTodoId, data}) => {
   }
 // ADD DATA TO THE TODO STATE, IF USERS WANT TO EDIT
   useEffect(() => {
-    console.log(data);
     if(data.length) {
       const {text, status} = data[0];
       setTodo(text);
@@ -33,7 +32,13 @@ const TodoForm = ({submitData, removeTodo, cancleHandler, isTodoId, data}) => {
       </View>
       <View style={styles.buttonBox}>
         <Button text="Cancle" mode onPress={cancleHandler} />
-        <Button text="Add" onPress={submitHandler} />        
+        {
+          isTodoId ? (
+            <Button text="Update" onPress={submitHandler} />
+          ) : (
+            <Button text="Add" onPress={submitHandler} />
+          )
+        }        
       </View>
     </View>
   )

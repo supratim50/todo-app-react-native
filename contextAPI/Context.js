@@ -11,7 +11,7 @@ const Context = ({children}) => {
         dispatch({type: 'ADD', payload: todo})
     }
 
-    const deleteTodo = (id) => {
+    const removeTodo = (id) => {
         dispatch({type: 'REMOVE', id: id})
     }
 
@@ -22,7 +22,7 @@ const Context = ({children}) => {
     const value = {
         todos: todoList,
         addTodo: addTodo,
-        deleteTodo: deleteTodo,
+        removeTodo: removeTodo,
         updateTodo: updateTodo
     }
 

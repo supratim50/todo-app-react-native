@@ -1,19 +1,48 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import {useNavigation} from "@react-navigation/native";
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import {TodoContext} from "../../contextAPI/Context";
 
 const CardList = ({text, status, id}) => {
-  
+
+  const todoCTX = useContext(TodoContext);
   const navigation = useNavigation();
 
-  const presshandler = () => {
+// UPDATE STATUS
+const updateStatus = () => {
+  const newStatus = {
+    status: status === 'complete' ? 'incomplete' : 'complete'
+  }
+  todoCTX.updateTodo(id, newStatus);
+}
+
+// PRESS HANDLER
+  const pressHandler = () => {
     navigation.navigate("ManageTodos", {
         todoId: id
     })
 }
+// LONG PRESS HANDLER
+const longPresshandler = () => {
+  if(status === 'incomplete') {
+    Alert.alert(
+      "Completed", 
+      `Do you complete the task \'${text}\' ?`, 
+      [{text:"Yes, Completed", onPress: updateStatus}],
+      {cancelable: true}
+    )
+  } else {
+    Alert.alert(
+      "Incompleted", 
+      `Oops, Marked \'${text}\' as completed by Mistake ?`, 
+      [{text:"Incomplete", onPress: () => updateStatus()}],
+      {cancelable: true}
+    )
+  }
+}
 
   return (
-    <TouchableOpacity style={styles.todoBox(status)} activeOpacity={0.7} onLongPress={() => {}}  onPress={presshandler}>
+    <TouchableOpacity style={styles.todoBox(status)} activeOpacity={0.7} onLongPress={longPresshandler} delayLongPress={300}  onPress={pressHandler}>
         <Text style={styles.todoText}>{text}</Text>
     </TouchableOpacity>
   )
