@@ -15,10 +15,15 @@ const Context = ({children}) => {
         dispatch({type: 'REMOVE', id: id})
     }
 
+    const updateTodo = (id, data) => {
+        dispatch({type: 'UPDATE', payload: {id: id, data: data}})
+    }
+
     const value = {
         todos: todoList,
         addTodo: addTodo,
-        deleteTodo: deleteTodo
+        deleteTodo: deleteTodo,
+        updateTodo: updateTodo
     }
 
   return (

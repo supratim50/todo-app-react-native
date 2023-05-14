@@ -14,7 +14,7 @@ const InComplete = () => {
         <FlatList 
             data={completeTodos}
             renderItem={({item}) => (
-                <CardList text={item.text} status={item.status}/>
+                <CardList text={item.text} status={item.status} id={item.id}/>
             )}
             keyExtractor={(item) => item.id}
         />

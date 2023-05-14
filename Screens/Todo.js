@@ -4,49 +4,16 @@ import CardList from '../components/lists/CardList';
 import {TodoContext} from "../contextAPI/Context";
 
 
-const Todo = () => {
+const Todo = ({navigation}) => {
 
     const todoCtx = useContext(TodoContext);
-
-    // const [DUMMY_DATA, setDUMMY_DATA] = useState([
-    //     {
-    //         id: "e1",
-    //         text: "Doing execise",
-    //         status: 'complete'
-    //     },
-    //     {
-    //         id: "e2",
-    //         text: "Make breakfast",
-    //         status: 'Incomplete'
-    //     },
-    //     {
-    //         id: "e3",
-    //         text: "Wash Cloths",
-    //         status: 'complete'
-    //     },
-    //     {
-    //         id: "e4",
-    //         text: "Make Lunch",
-    //         status: 'incomplete'
-    //     },
-    //     {
-    //         id: "e5",
-    //         text: "Wash Dishes",
-    //         status: 'complete'
-    //     },
-    //     {
-    //         id: "e6",
-    //         text: "Make Dinner",
-    //         status: 'incomplete'
-    //     },
-    // ]);
 
   return (
     <View style={styles.container}>
         <FlatList 
             data={todoCtx.todos}
             renderItem={({item}) => (
-                <CardList text={item.text} status={item.status}/>
+                <CardList text={item.text} status={item.status} id={item.id} />
             )}
             keyExtractor={(item) => item.id}
         />

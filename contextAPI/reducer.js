@@ -39,6 +39,13 @@ export const todoReducer = (state, action) => {
         case 'REMOVE':
             const newTodos = Todos.filter((todo) => todo.id !== action.id);
             return newTodos;
+        case 'UPDATE':
+            const updatableIndex = state.findIndex((item) => item.id === action.payload.id);
+            const updatableItem = state[updatableIndex];
+            const newData = {...updatableItem, ...action.payload.data};
+            const newList = [...state];
+            newList[updatableIndex] = newData;
+            return newList;
         default:
             return state;
     }

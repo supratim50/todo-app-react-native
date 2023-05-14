@@ -1,9 +1,19 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {useNavigation} from "@react-navigation/native";
+import React from 'react';
 
-const CardList = ({text, status}) => {
+const CardList = ({text, status, id}) => {
+  
+  const navigation = useNavigation();
+
+  const presshandler = () => {
+    navigation.navigate("ManageTodos", {
+        todoId: id
+    })
+}
+
   return (
-    <TouchableOpacity style={styles.todoBox(status)} activeOpacity={0.7} onLongPress={() => {}}>
+    <TouchableOpacity style={styles.todoBox(status)} activeOpacity={0.7} onLongPress={() => {}}  onPress={presshandler}>
         <Text style={styles.todoText}>{text}</Text>
     </TouchableOpacity>
   )
