@@ -1,16 +1,12 @@
-export const Todos = [
-    {
-        id: "e1",
-        text: "Doing execise",
-        status: 'complete'
-    }
-];
+export const Todos = [];
 
 export const todoReducer = (state, action) => {
     switch(action.type) {
         case 'ADD':
-            const id = new Date() + Math.random();
-            return [{...action.payload, id: id}, ...state];
+            const id = action.payload.id;
+            return [{id: id, ...action.payload.todo}, ...state];
+        case 'SET':
+            return action.payload;
         case 'REMOVE':
             const newTodos = state.filter((todo) => todo.id !== action.id);
             return newTodos;

@@ -7,8 +7,12 @@ const Context = ({children}) => {
 
     const [todoList, dispatch] = useReducer(todoReducer, Todos);
 
-    const addTodo = (todo) => {
-        dispatch({type: 'ADD', payload: todo})
+    const addTodo = (id, todo) => {
+        dispatch({type: 'ADD', payload: {todo: todo, id: id}})
+    }
+
+    const setTodo = (todoList) => {
+        dispatch({type: 'SET', payload: todoList})
     }
 
     const removeTodo = (id) => {
@@ -22,6 +26,7 @@ const Context = ({children}) => {
     const value = {
         todos: todoList,
         addTodo: addTodo,
+        setTodo: setTodo,
         removeTodo: removeTodo,
         updateTodo: updateTodo
     }

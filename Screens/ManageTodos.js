@@ -4,6 +4,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import TodoForm from "../components/ManageTodos/TodoForm";
 import {TodoContext} from "../contextAPI/Context";
 
+//DATABASE
+import {postTodo, updateTodo, deleteTodo} from "../utils/http";
+
 const ManageTodos = ({route, navigation}) => {
 //CONTEXT
 const todoCTX = useContext(TodoContext);
@@ -16,16 +19,19 @@ const data = todoCTX.todos.filter((item) => item.id === todoId);
 
 
 // SUBMIT DATA ==================================================
-const confirmHandler = (data) => {
+const confirmHandler = async (data) => {
   if(isTodoId) {
+    updateTodo(todoId, data);
     todoCTX.updateTodo(todoId, data);
   } else {
-    todoCTX.addTodo(data);
+    const id = await postTodo(data);
+    todoCTX.addTodo(id, data);
   }
   navigation.goBack();
 }
 // REMOVE DATA ===================================================
 const removeData = () => {
+  deleteTodo(todoId);
   todoCTX.removeTodo(todoId);
   navigation.goBack();
 }

@@ -3,6 +3,9 @@ import {useNavigation} from "@react-navigation/native";
 import React, { useState, useContext } from 'react';
 import {TodoContext} from "../../contextAPI/Context";
 
+//DATABASE
+import {updateTodo} from "../../utils/http";
+
 const CardList = ({text, status, id}) => {
 
   const todoCTX = useContext(TodoContext);
@@ -11,8 +14,10 @@ const CardList = ({text, status, id}) => {
 // UPDATE STATUS
 const updateStatus = () => {
   const newStatus = {
-    status: status === 'complete' ? 'incomplete' : 'complete'
+    status: status === 'complete' ? 'incomplete' : 'complete',
+    text: text
   }
+  updateTodo(id, newStatus);
   todoCTX.updateTodo(id, newStatus);
 }
 
